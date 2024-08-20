@@ -1,24 +1,25 @@
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { Route,  createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import RootLayot from "./layouts/RootLayot";
 
 function App() {
+ 
+  const rooter = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayot />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+    </Route>
+    )
+  )
+
   return (
-    <BrowserRouter>
-      <header>
-        <h1>Title</h1>
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="about">About</NavLink>
-        </nav>
-      </header>
-      <main>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-        </Routes>
-      </main>
-    </BrowserRouter>
+    
+   
+      
+      <RouterProvider router={rooter} />
+  
   );
 }
 
